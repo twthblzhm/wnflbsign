@@ -47,7 +47,7 @@ def start(cookie, username):
         # 获取签到链接,并签到
         qiandao_url = re.search(r'}function fx_checkin(.*?);', user_info).group(1)
         qiandao_url = qiandao_url[47:-2]
-        print(qiandao_url)
+        #print(qiandao_url)
         # 签到
         s.get('https://' + flb_url + '/' + qiandao_url, headers=headers).text
 
@@ -58,7 +58,7 @@ def start(cookie, username):
         sing_day = re.search(r'<div class="tip_c">(.*?)</div>', user_info).group(1)
         log_info = "{}当前{}".format(sing_day, current_money)
         print(log_info)
-        #send("签到结果", log_info)
+        send("签到结果", log_info)
 
     except Exception as e:
         print("签到失败，失败原因:"+str(e))
