@@ -13,8 +13,8 @@ ql repo https://github.com/twthblzhm/wnflbsigng.git
 
 环境变量：
 需要添加两个环境变量，新建变量时名称直接添加即可，不要加符号
-FUBA        
+FUBA
 FUBAUN
-然后，值然添加（如图所示）
+然后，值然添加
 FUBA的值是填写cookie
 FUBAUN的值填写论坛里的用户名，判断是否登录成功，cookie是否失效
