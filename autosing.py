@@ -14,7 +14,7 @@ from sendNotify import send
 def start(cookie, username):
     try:
         s = requests.session()
-        flb_url = 'www.wnflb2023.com'
+        flb_url = get_addr()
         #print(flb_url)
         #print(cookie)
         headers = {'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
@@ -43,7 +43,7 @@ def start(cookie, username):
         else:
             print("未获取到用户名")
         if user_name is None or (user_name.group(1) != username):
-            raise Exception("【福利吧】cookie失效???????")
+            raise Exception("【福利吧】cookie失效,请检查并更新")
         # 获取签到链接,并签到
         qiandao_url = re.search(r'}function fx_checkin(.*?);', user_info).group(1)
         qiandao_url = qiandao_url[47:-2]
@@ -66,10 +66,17 @@ def start(cookie, username):
 
 
 def get_addr():
+    #论坛网址发布地址，若变动，需手动更新
     pub_page = "http://fuliba2023-1256179406.file.myqcloud.com/"
     ret = requests.get(pub_page)
     ret.encoding = "utf-8"
-    bbs_addr = re.findall(r'福利吧论坛地址<a href=.*?><i>https://(.*?)</i></a>', ret.text)[1]
+    #print(ret.text)
+    ret = ret.text.replace('\n','')
+    ret = ret.replace(' ','')
+    ret = ret.replace('\t','')
+    #print(ret)
+    bbs_addr = re.findall(r'论坛地址<ahref="https://(.*?)"', ret)[0]
+    print("获取到的论坛地址是"+bbs_addr)
     return bbs_addr
 
 
