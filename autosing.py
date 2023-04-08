@@ -15,8 +15,6 @@ def start(cookie, username):
     try:
         s = requests.session()
         flb_url = get_addr()
-        #print(flb_url)
-        #print(cookie)
         headers = {'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
                    'accept-encoding': 'gzip, deflate, br',
                    'accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,zh-TW;q=0.5',
@@ -32,11 +30,8 @@ def start(cookie, username):
                    'upgrade-insecure-requests': '1',
                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36 Edg/111.0.1661.62'}
         # 访问Pc主页
-        user_info = s.get('https://' + flb_url + '/forum-2-1.html', headers=headers,verify=False).text
-        #print(user_info)
-        #print(username)
+        user_info = s.get('https://' + flb_url + '/forum-2-1.html', headers=headers).text
         user_name = re.search(r'title="访问我的空间">(.*?)</a>', user_info)
-        #print(user_name)
         if user_name:
             print("登录用户名为：" + user_name.group(1))
             print("环境用户名为：" + username)
@@ -70,11 +65,9 @@ def get_addr():
     pub_page = "http://fuliba2023-1256179406.file.myqcloud.com/"
     ret = requests.get(pub_page)
     ret.encoding = "utf-8"
-    #print(ret.text)
     ret = ret.text.replace('\n','')
     ret = ret.replace(' ','')
     ret = ret.replace('\t','')
-    #print(ret)
     bbs_addr = re.findall(r'论坛地址<ahref="https://(.*?)"', ret)[0]
     print("获取到的论坛地址是"+bbs_addr)
     return bbs_addr
