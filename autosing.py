@@ -57,7 +57,7 @@ def start(cookie, username):
 
     except Exception as e:
         print("签到失败，失败原因:"+str(e))
-        send("签到结果", str(e))
+        send("【fuliba论坛】签到结果", str(e))
 
 
 def get_addr():
