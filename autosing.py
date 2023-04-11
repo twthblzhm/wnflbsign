@@ -53,10 +53,10 @@ def start(cookie, username):
         sing_day = re.search(r'<div class="tip_c">(.*?)</div>', user_info).group(1)
         log_info = "{}当前{}".format(sing_day, current_money)
         print(log_info)
-        send("签到结果", log_info)
+        send("【fuliba论坛】签到结果", log_info)
 
     except Exception as e:
-        print("签到失败，失败原因:"+str(e))
+        print("【fuliba论坛】签到失败，失败原因:"+str(e))
         send("【fuliba论坛】签到结果", str(e))
 
 
